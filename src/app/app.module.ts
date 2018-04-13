@@ -20,6 +20,10 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { UserService } from './services/user.service';
+import { AdminAuthGuard } from './admin-auth-guard.service';
 
 
 @NgModule({
@@ -47,16 +51,24 @@ import { LoginComponent } from './login/login.component';
       { path: '', component: HomeComponent },
       { path: 'produtos', component: ProductsComponent },
       { path: 'carrinho', component: ShoppingCartComponent },
-      { path: 'check-out', component: CheckOutComponent },
-      { path: 'sucesso', component: OrderSuccessComponent },
-      { path: 'meus-pedidos', component: MyOrdersComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/produtos', component: AdminProductsComponent },
-      { path: 'admin/pedidos', component: AdminOrdersComponent },
+
+      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
+      { path: 'sucesso', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'meus-pedidos', component: MyOrdersComponent, canActivate: [AuthGuard] },
+
+      { path: 'admin/produtos', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/pedidos', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    AdminAuthGuard,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
