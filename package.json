@@ -23,10 +23,12 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^2.0.0-alpha.0",
+    "angular-4-data-table": "^0.4.6",
     "angularfire2": "^5.0.0-rc.6.0",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
     "firebase": "^4.12.1",
+    "ng2-validation": "^4.2.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
