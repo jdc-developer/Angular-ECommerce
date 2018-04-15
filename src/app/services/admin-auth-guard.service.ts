@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
