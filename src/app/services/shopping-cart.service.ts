@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Product } from '../models/product';
 import 'rxjs/add/operator/take';
+import { ShoppingCart } from '../models/shopping-cart';
 
 @Injectable()
 export class ShoppingCartService {
@@ -14,11 +15,16 @@ export class ShoppingCartService {
     });
   }
 
-  private getCart(cartId: string) {
+  async getCart(): Promise<AngularFireObject<ShoppingCart>>  {
+    let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId);
   }
 
-  private async getOrCreateCartId() {
+  private getItem(cartId: string, productId: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
+  }
+
+  private async getOrCreateCartId(): Promise<string> {
     const cartId = localStorage.getItem('cartId');
     if (cartId) return cartId;
 
@@ -28,20 +34,20 @@ export class ShoppingCartService {
   }
 
   async addToCart(product: Product) {
-    const cartId = await this.getOrCreateCartId();
-    const items$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.key);
+    this.updateItemQuantity(product, 1);
+  }
 
-    let exists = false;
-    let quantidade = 1;
+  async removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+  }
+
+  private async updateItemQuantity(product: Product, change: number) {
+    const cartId = await this.getOrCreateCartId();
+    const items$ = this.getItem(cartId, product.key);
 
     items$.snapshotChanges().take(1).subscribe(item => {
       const itemPayload = item.payload.val();
-        items$.update({product: {
-          title: product.title,
-          price: product.price,
-          category: product.category,
-          imageUrl: product.imageUrl,
-        }, quantity: (itemPayload ? itemPayload.quantity : 0) + 1});
+        items$.update({product: product, quantity: (itemPayload ? itemPayload.quantity : 0) + change});
       });
   }
 }

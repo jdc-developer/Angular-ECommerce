@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <a class="navbar-brand" routerLink="/">E-Commerce</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li routerLinkActive="active" class="nav-item">
-        <a class="nav-link" routerLink="/carrinho">Carrinho</a>
+        <a class="nav-link" routerLink="/carrinho">
+          Carrinho
+          <span class="badge badge-warning badge-pill">
+            {{ shoppingCartItemCount }}
+          </span>
+        </a>
       </li>
       <ng-template #anonymousUser>
         <li routerLinkActive="active" class="nav-item">
