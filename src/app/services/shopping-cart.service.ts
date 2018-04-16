@@ -27,24 +27,21 @@ export class ShoppingCartService {
     return result.key;
   }
 
-  addToCart(product: Product) {
-    const cartId = this.getOrCreateCartId();
+  async addToCart(product: Product) {
+    const cartId = await this.getOrCreateCartId();
     const items$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.key);
 
     let exists = false;
     let quantidade = 1;
 
-    items$.snapshotChanges().subscribe(item => {
-      if (item.payload.exists()) {
-        quantidade = +item.payload.val().quantity;
-        exists = true;
-      }}
-    );
-
-    if (exists) {
-      items$.update({ quantity: quantidade + 1 });
-    } else {
-      items$.set({ product: product, quantity: quantidade});
-    }
+    items$.snapshotChanges().take(1).subscribe(item => {
+      const itemPayload = item.payload.val();
+        items$.update({product: {
+          title: product.title,
+          price: product.price,
+          category: product.category,
+          imageUrl: product.imageUrl,
+        }, quantity: (itemPayload ? itemPayload.quantity : 0) + 1});
+      });
   }
 }

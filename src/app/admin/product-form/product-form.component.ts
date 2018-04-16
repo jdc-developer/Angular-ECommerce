@@ -13,6 +13,7 @@ export class ProductFormComponent implements OnInit {
 
   categories$;
   product: Product = {
+    key: '',
     title: '',
     price: null,
     category: '',
