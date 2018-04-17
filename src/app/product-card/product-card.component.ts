@@ -15,7 +15,8 @@ export class ProductCardComponent {
   // tslint:disable-next-line:no-input-rename
   @Input('show-actions')
   showActions = true;
-  
+
+  // tslint:disable-next-line:no-input-rename
   @Input('shopping-cart')
   shoppingCart;
 
@@ -31,7 +32,7 @@ export class ProductCardComponent {
 
   getQuantity() {
     if (!this.shoppingCart) return 0;
-    let item = this.shoppingCart.items[this.product.key];
+    const item = this.shoppingCart.items[this.product.key];
     return item ? item.quantity : 0;
   }
 
