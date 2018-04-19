@@ -1,0 +1,20 @@
+<div *ngIf="cart" class="card">
+  <div class="card-body">
+    <h3>Resumo do pedido</h3>
+    <p>Você tem {{ cart.totalItemsCount }} itens no carrinho.</p>
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let item of cart.items">
+          <td>{{ item.quantity }} x {{ item.title }}</td>
+          <td>{{ item.price | currency:'R$' }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th class="text-right">{{ cart.totalPrice | currency:'R$' }}</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
