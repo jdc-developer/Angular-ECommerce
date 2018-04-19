@@ -30,10 +30,10 @@ export class CheckOutComponent implements OnInit {
 
  async ngOnInit() {
     this.cart$ = await this.cartService.getCart();
-    this.router.navigate(['/order-success']);
   }
 
   save(order) {
     this.orderService.create(order);
+    this.router.navigate(['/order-success']);
   }
 }
