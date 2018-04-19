@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6">
     <h2>Envio</h2>
-    <form #f="ngForm" (ngSubmit)="save(f.value)">
+    <form #f="ngForm" (ngSubmit)="save()">
       <div class="form-group">
         <label for="name">Nome</label>
         <input #name="ngModel" name="name" id="name" required [(ngModel)]="shipping.name"  type="text" class="form-control">
