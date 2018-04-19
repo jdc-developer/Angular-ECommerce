@@ -4,21 +4,24 @@
     <form #f="ngForm" (ngSubmit)="save(f.value)">
       <div class="form-group">
         <label for="name">Nome</label>
-        <input name="name" id="name" [(ngModel)]="order.name"  type="text" class="form-control">
+        <input #name="ngModel" name="name" id="name" required [(ngModel)]="shipping.name"  type="text" class="form-control">
+        <div *ngIf="name.touched && name.invalid" class="alert alert-danger">O nome é obrigatório</div>
       </div>
       <div class="form-group">
         <label for="address">Endereço</label>
-        <input name="address" [(ngModel)]="order.address"  id="address" type="text" class="form-control" placeholder="Linha 1"><br>
-        <input name="address1" id="address1" type="text" class="form-control" placeholder="Linha 2">
+        <input #address="ngModel" name="address" required [(ngModel)]="shipping.address"  id="address" type="text" class="form-control" placeholder="Linha 1">
+        <div *ngIf="address.touched && address.invalid" class="alert alert-danger">O endereço é obrigatório</div><br>
+        <input name="address1" id="address1" [(ngModel)]="shipping.address1" type="text" class="form-control" placeholder="Linha 2">
       </div>
       <div class="form-group">
         <label for="city">Cidade</label>
-        <input #city="ngModel" [(ngModel)]="order.city" name="city" id="city" type="text" class="form-control">
+        <input #city="ngModel" required [(ngModel)]="shipping.city" name="city" id="city" type="text" class="form-control">
+        <div *ngIf="city.touched && city.invalid" class="alert alert-danger">A cidade é obrigatória</div>
       </div>
-      <button class="btn btn-primary">Realizar pedido</button>
+      <button [disabled]="f.invalid" class="btn btn-primary">Realizar pedido</button>
     </form>
   </div>
   <div class="col-md-6">
-    <shopping-cart-card [shopping-cart]="cart$ | async"></shopping-cart-card>
+    <shopping-cart-card [shopping-cart]="cart"></shopping-cart-card>
   </div>
 </div>

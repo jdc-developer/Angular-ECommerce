@@ -73,7 +73,7 @@ import { OrderService } from './services/order.service';
       { path: 'login', component: LoginComponent },
 
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-      { path: 'sucesso', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'sucesso/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'meus-pedidos', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
       { path: 'admin/produtos/novo', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
