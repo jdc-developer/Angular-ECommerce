@@ -19,4 +19,8 @@ export class OrderService {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
   }
+
+  getByUser(userId: string) {
+    return this.db.list('/orders', ref => ref.orderByChild('userId').equalTo(userId)).valueChanges();
+  }
 }

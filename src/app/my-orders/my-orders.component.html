@@ -1,3 +1,21 @@
-<p>
-  my-orders works!
-</p>
+<h1>Meus pedidos</h1>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Data</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders$ | async">
+          <td>{{ order.shipping.name }}</td>
+          <td>{{ order.datePlaced | date }}</td>
+          <td><a href="#">Ver</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

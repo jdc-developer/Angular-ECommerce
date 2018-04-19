@@ -41,7 +41,7 @@
             <div *ngIf="imageUrl.errors.url">Digite uma URL válida, por favor</div>
           </div>
         </div>
-        <button class="btn btn-primary">Salvar</button>
+        <button [disabled]="f.invalid" class="btn btn-primary">Salvar</button>
         <button type="button" (click)="deletar()" class="btn btn-danger">Deletar</button>
       </form>
   </div>
