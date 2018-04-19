@@ -21,20 +21,20 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from './services/auth-guard.service';
-import { UserService } from './services/user.service';
-import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/services/auth-guard.service';
+import { UserService } from './shared/services/user.service';
+import { AdminAuthGuard } from './shared/services/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './services/category.service';
+import { CategoryService } from './shared/services/category.service';
 import { FormsModule } from '@angular/forms';
-import { ProductService } from './services/product.service';
+import { ProductService } from './shared/services/product.service';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import { ShoppingCartService } from './services/shopping-cart.service';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { ProductCardComponent } from './shared/components/product-card/product-card.component';
+import { ShoppingCartService } from './shared/services/shopping-cart.service';
+import { ProductQuantityComponent } from './shared/components/product-quantity/product-quantity.component';
 import { ShoppingCartCardComponent } from './shopping-cart-card/shopping-cart-card.component';
-import { OrderService } from './services/order.service';
+import { OrderService } from './shared/services/order.service';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 
 
@@ -54,8 +54,6 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductCardComponent,
-    ProductQuantityComponent,
     ShoppingCartCardComponent,
     ShippingFormComponent
   ],
