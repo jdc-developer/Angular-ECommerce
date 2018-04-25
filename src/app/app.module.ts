@@ -1,98 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { CustomFormsModule } from 'ng2-validation';
-import { DataTableModule } from 'angular-4-data-table';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { environment } from '../environments/environment';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ProductsComponent } from './products/products.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { LoginComponent } from './login/login.component';
-import { AuthService } from './shared/services/auth.service';
-import { AuthGuard } from './shared/services/auth-guard.service';
-import { UserService } from './shared/services/user.service';
-import { AdminAuthGuard } from './shared/services/admin-auth-guard.service';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './shared/services/category.service';
-import { FormsModule } from '@angular/forms';
-import { ProductService } from './shared/services/product.service';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './shared/components/product-card/product-card.component';
-import { ShoppingCartService } from './shared/services/shopping-cart.service';
-import { ProductQuantityComponent } from './shared/components/product-quantity/product-quantity.component';
-import { ShoppingCartCardComponent } from './shopping-cart-card/shopping-cart-card.component';
-import { OrderService } from './shared/services/order.service';
-import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { AdminModule } from './admin/admin.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { ProductsComponent } from './shopping/components/products/products.component';
+import { ShoppingModule } from './shopping/shopping.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ShoppingCartComponent,
-    NotFoundComponent,
-    NavbarComponent,
-    ProductsComponent,
-    CheckOutComponent,
-    OrderSuccessComponent,
-    MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    LoginComponent,
-    ProductFormComponent,
-    ProductFilterComponent,
-    ShoppingCartCardComponent,
-    ShippingFormComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
+    AdminModule,
+    ShoppingModule,
+    CoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    FormsModule,
-    DataTableModule,
-    CustomFormsModule,
-    NgbModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'produtos', component: ProductsComponent },
-      { path: 'carrinho', component: ShoppingCartComponent },
+      { path: '', component: ProductsComponent },
       { path: 'login', component: LoginComponent },
-
-      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-      { path: 'sucesso/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
-      { path: 'meus-pedidos', component: MyOrdersComponent, canActivate: [AuthGuard] },
-
-      { path: 'admin/produtos/novo', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/produtos/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/produtos', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/pedidos', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
       { path: '**', component: NotFoundComponent }
     ])
-  ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    AdminAuthGuard,
-    UserService,
-    CategoryService,
-    ProductService,
-    ShoppingCartService,
-    OrderService
   ],
   bootstrap: [AppComponent]
 })
