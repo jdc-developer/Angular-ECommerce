@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableModule } from 'angular-4-data-table';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { CustomFormsModule } from 'ng2-validation';
@@ -22,7 +21,6 @@ import { UserService } from './services/user.service';
   imports: [
     CommonModule,
     FormsModule,
-    Angular2FontawesomeModule,
     CustomFormsModule,
     DataTableModule,
     AngularFireDatabaseModule,
