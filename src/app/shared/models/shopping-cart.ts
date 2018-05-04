@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './../services/shopping-cart.service';
 import { ShoppingCartItem } from './shopping-cart-item';
 import { Product } from './product';
 
@@ -6,7 +7,6 @@ export class ShoppingCart {
 
     constructor(private itemsMap: { [productId: string]: ShoppingCartItem }) {
         this.itemsMap = itemsMap || {};
-        // tslint:disable-next-line:forin
         for (const productId in itemsMap) {
             const item = itemsMap[productId];
             this.items.push(new ShoppingCartItem({...item, key: productId}));
@@ -27,8 +27,9 @@ export class ShoppingCart {
 
     get totalItemsCount() {
         let count = 0;
-        for (const productId in this.itemsMap)
-          count += this.itemsMap[productId].quantity;
+        for (const productId in this.itemsMap) {
+            count += this.itemsMap[productId].quantity;
+        }
         return count;
     }
 }

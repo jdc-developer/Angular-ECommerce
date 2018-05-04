@@ -1,36 +1,40 @@
 <h1>Carrinho</h1>
-<div class="row col-10" *ngIf="cart$ | async as cart">
-  <p>
-    Você tem {{ cart.totalItemsCount }} itens no seu carrinho.
-    <button *ngIf="cart.items.length" class="btn btn-light btn-sm" (click)="clearCart()">Limpar Carrinho</button>
-  </p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Produto</th>
-        <th class="text-center" style="width: 230px">Quantidade</th>
-        <th class="text-right" style="width: 200px">Preço</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of cart.items">
-        <td><div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail"></div></td>
-        <td>{{ item.title }}</td>
-        <td>
-          <product-quantity [product]="item" [shopping-cart]="cart"></product-quantity>
-        </td>
-        <td class="text-right">{{ item.totalPrice | currency:'R$' }}</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th class="text-right">{{ cart.totalPrice | currency:'R$' }}</th>
-      </tr>
-    </tfoot>
-  </table>
-  <button  *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Check-out</button>
+<div class="row">
+  <div class="col-10" *ngIf="cart$ | async as cart">
+      <p>
+        Você tem {{ cart.totalItemsCount }} itens no seu carrinho.
+      </p>
+      <div class="float-right">
+          <button *ngIf="cart.items.length" class="btn btn-light btn-sm" (click)="clearCart()">Limpar Carrinho</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Produto</th>
+            <th class="text-center" style="width: 230px">Quantidade</th>
+            <th class="text-right" style="width: 200px">Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart.items">
+            <td><div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail"></div></td>
+            <td>{{ item.title }}</td>
+            <td>
+              <product-quantity [product]="item" [shopping-cart]="cart"></product-quantity>
+            </td>
+            <td class="text-right">{{ item.totalPrice | currency:'R$' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right">{{ cart.totalPrice | currency:'R$' }}</th>
+          </tr>
+        </tfoot>
+      </table>
+      <button  *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Check-out</button>
+    </div>
 </div>
